@@ -1,4 +1,4 @@
-*.test
+*.txt
 .DS_Store
 /*.pdf
 /*.pprof
@@ -8,3 +8,4 @@
 /vendor/
 coverage.out
 coverage.xml
+/gomodcachesize

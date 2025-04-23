@@ -1,0 +1,85 @@
+version: "2"
+
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+
+linters:
+  default: all
+  disable:
+    - cyclop # duplicate of gocyclo
+    - dupl # not relevant
+    - err113 # not relevant
+    - exhaustive # not relevant
+    - exhaustruct # not relevant
+    - forcetypeassert
+    - gosmopolitan # not relevant
+    - ireturn # not relevant
+    - lll # not relevant
+    - makezero # not relevant
+    - nilnil # not relevant
+    - nonamedreturns
+    - paralleltest # not relevant
+    - prealloc # not relevant
+    - rowserrcheck # not relevant (SQL)
+    - sqlclosecheck # not relevant (SQL)
+    - testpackage # not relevant
+    - tparallel # not relevant
+    - varnamelen # not relevant
+    - forbidigo
+    - wrapcheck
+
+  settings:
+    godox:
+      keywords:
+        - FIXME
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment
+    goconst:
+      min-len: 3
+      min-occurrences: 3
+    misspell:
+      locale: US
+    gocritic:
+      disabled-checks:
+        - paramTypeCombine # already handle by gofumpt.extra-rules
+        - whyNoLint # already handle by nolintlint
+        - unnamedResult
+        - hugeParam
+        - sloppyReassign
+        - rangeValCopy
+        - octalLiteral
+        - ptrToRefParam
+        - appendAssign
+        - ruleguard
+        - httpNoBody
+        - exposedSyncMutex
+      enabled-tags:
+        - diagnostic
+        - style
+        - performance
+    depguard:
+      rules:
+        main:
+          deny:
+            - pkg: github.com/instana/testify
+              desc: not allowed
+            - pkg: github.com/pkg/errors
+              desc: Should be replaced by standard lib errors package
+    funlen:
+      lines: -1
+      statements: 50
+    perfsprint:
+      err-error: true
+      errorf: true
+      sprintf1: true
+      strconcat: false
+    mnd:
+      ignored-numbers:
+        - "2"
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
